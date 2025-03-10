@@ -1,0 +1,29 @@
+import type React from "react"
+import type { Metadata } from "next"
+import { Montserrat } from "next/font/google"
+import "./globals.css"
+
+const montserrat = Montserrat({ subsets: ["cyrillic", "latin"] })
+
+export const metadata: Metadata = {
+  title: "Технические Услуги Ольи",
+  description:
+    "Профессиональные технические услуги, включая интеграцию доменов, разработку чат-ботов, настройку GetCourse и создание лендингов на Tilda.",
+    generator: 'v0.dev'
+}
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
+}>) {
+  return (
+    <html lang="ru" className="scroll-smooth">
+      <body className={montserrat.className}>{children}</body>
+    </html>
+  )
+}
+
+
+
+import './globals.css'

@@ -1,0 +1,1463 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 267 75% 50%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 267 50% 96%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 267 75% 94%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 267 75% 50%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 267 75% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 267 75% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at 30% 30%, rgba(149, 76, 233, 0.08) 0%, rgba(98, 58, 162, 0.03) 70%);
+}
+
+.service-card {
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(149, 76, 233, 0.05) 0%, rgba(98, 58, 162, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 50px rgba(149, 76, 233, 0.18);
+}
+
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-icon {
+  transition: all 0.4s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 0 8px rgba(149, 76, 233, 0.5));
+}
+
+.animate-in {
+  animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(180deg, rgba(149, 76, 233, 0.15) 0%, rgba(98, 58, 162, 0.05) 100%);
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  animation: blob-float 20s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes blob-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(5%, 5%) scale(1.1);
+  }
+  50% {
+    transform: translate(0, 10%) scale(0.9);
+  }
+  75% {
+    transform: translate(-5%, 5%) scale(1.1);
+  }
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #8a2be2 0%, #9370db 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.5s;
+  opacity: 0;
+}
+
+.btn-shine:hover::after {
+  animation: shine 1.5s ease-out;
+  opacity: 1;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  20% {
+    left: -50%;
+    opacity: 0.5;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 50px;
+  border: 2px solid rgba(149, 76, 233, 0.5);
+  border-radius: 15px;
+}
+
+.scroll-indicator::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background-color: rgba(149, 76, 233, 0.8);
+  border-radius: 50%;
+  animation: scroll-down 2s infinite;
+}
+
+@keyframes scroll-down {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(24px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.feature-list {
+  margin-top: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  padding-left: 0.5rem;
+  position: relative;
+}
+
+.feature-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+}
+
+.service-detail-card {
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.dark .service-detail-card {
+  background: linear-gradient(135deg, rgba(30, 30, 35, 0.8) 0%, rgba(25, 25, 30, 0.5) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.service-detail-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(31, 38, 135, 0.15);
+}
+
+.service-detail-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(149, 76, 233, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.service-detail-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.8) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  color: white;
+}
+
+.service-detail-content {
+  padding: 1.5rem;
+}
+
+.service-detail-footer {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(149, 76, 233, 0.1);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detail-animate-in {
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detail-stagger-1 {
+  animation-delay: 0.1s;
+}
+.detail-stagger-2 {
+  animation-delay: 0.2s;
+}
+.detail-stagger-3 {
+  animation-delay: 0.3s;
+}
+.detail-stagger-4 {
+  animation-delay: 0.4s;
+}
+.detail-stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button.active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+.tab-button:not(.active) {
+  background-color: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.tab-button:not(.active):hover {
+  background-color: hsl(var(--secondary) / 0.8);
+}
+
+.tab-content {
+  transition: all 0.3s ease;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+}
+
+.dark .glass-card {
+  background: rgba(30, 30, 35, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.function-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.function-item {
+  background-color: hsl(var(--secondary) / 0.5);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.function-item:hover {
+  background-color: hsl(var(--secondary));
+  transform: translateY(-3px);
+}
+
+.function-icon {
+  margin-right: 0.75rem;
+  color: hsl(var(--primary));
+  flex-shrink: 0;
+}
+
+.function-text {
+  font-size: 0.95rem;
+}
+
+/* Новые стили для современного дизайна */
+
+/* Неоморфизм для карточек */
+.neomorphic {
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(240, 240, 245, 0.7));
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.05), -10px -10px 20px rgba(255, 255, 255, 0.8);
+  border: none;
+}
+
+.dark .neomorphic {
+  background: linear-gradient(145deg, rgba(35, 35, 40, 0.9), rgba(25, 25, 30, 0.7));
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(50, 50, 60, 0.2);
+}
+
+/* Стеклянный эффект */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+}
+
+.dark .glassmorphism {
+  background: rgba(20, 20, 25, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Современные кнопки */
+.btn-modern {
+  border-radius: 1rem;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn-modern::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, hsl(var(--primary) / 0.8), hsl(var(--primary)));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-modern:hover::before {
+  opacity: 0;
+}
+
+.btn-modern:hover::after {
+  opacity: 1;
+}
+
+/* Плавающие элементы */
+.float-element {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Градиентные границы */
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius);
+  background: linear-gradient(var(--background), var(--background)) padding-box,
+    linear-gradient(45deg, hsl(var(--primary)), hsl(var(--primary) / 0.5)) border-box;
+  border: 2px solid transparent;
+}
+
+/* Анимированный градиент */
+.animated-gradient {
+  background: linear-gradient(-45deg, #8a2be2, #9370db, #8a2be2, #9370db);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Современная типографика */
+.heading-modern {
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+
+.subheading-modern {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* Эффект появления при скролле */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Современные иконки с эффектом */
+.icon-modern {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, hsl(var(--primary) / 0.9), hsl(var(--primary) / 0.7));
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.icon-modern::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background: linear-gradient(145deg, hsl(var(--primary) / 0.7), hsl(var(--primary) / 0.9));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.icon-modern:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+}
+
+.icon-modern:hover::after {
+  opacity: 1;
+}
+
+.icon-modern svg {
+  z-index: 1;
+}
+
+/* 3D эффект для карточек */
+.card-3d {
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover {
+  transform: rotateX(5deg) rotateY(5deg);
+}
+
+/* Современный скроллбар */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--secondary) / 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.7);
+}
+
+/* Эффект волны для кнопок */
+.btn-wave {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-wave::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.btn-wave:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 1;
+  transition: width 0.6s ease, height 0.6s ease, opacity 0.6s ease;
+}
+
+/* Технические декоративные элементы */
+.tech-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to right, rgba(149, 76, 233, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(149, 76, 233, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.tech-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px dashed rgba(149, 76, 233, 0.2);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.tech-dots {
+  position: absolute;
+  background-image: radial-gradient(rgba(149, 76, 233, 0.2) 1px, transparent 1px);
+  background-size: 20px 20px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.tech-line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(149, 76, 233, 0.2), transparent);
+  height: 1px;
+  width: 100%;
+  z-index: -1;
+}
+
+/* Современные эффекты карточек */
+.modern-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background: rgba(255, 255, 255, 0.01);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark .modern-card {
+  background: rgba(30, 30, 35, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.modern-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(149, 76, 233, 0.1));
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modern-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(149, 76, 233, 0.15);
+}
+
+.modern-card:hover::before {
+  opacity: 1;
+}
+
+/* Технические индикаторы */
+.tech-indicator {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: hsl(var(--primary));
+  box-shadow: 0 0 10px hsl(var(--primary));
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(149, 76, 233, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(149, 76, 233, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(149, 76, 233, 0);
+  }
+}
+
+/* Современные кнопки */
+.btn-modern {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.btn-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(149, 76, 233, 0.8), rgba(98, 58, 162, 0.8));
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.btn-modern::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(98, 58, 162, 0.8), rgba(149, 76, 233, 0.8));
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.btn-modern:hover::after {
+  left: 0;
+}
+
+/* Технические анимации */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanline {
+  position: absolute;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to right, transparent, rgba(149, 76, 233, 0.5), transparent);
+  opacity: 0.5;
+  z-index: 1;
+  animation: scanline 3s linear infinite;
+  pointer-events: none;
+}
+
+/* Современная типографика */
+.tech-heading {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary) / 0.7));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.tech-subheading {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: hsl(var(--primary) / 0.8);
+}
+
+/* Технические иконки */
+.tech-icon-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(149, 76, 233, 0.2), rgba(98, 58, 162, 0.1));
+  overflow: hidden;
+}
+
+.tech-icon-container::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  z-index: 1;
+}
+
+.tech-icon {
+  position: relative;
+  z-index: 2;
+  color: hsl(var(--primary));
+  filter: drop-shadow(0 0 5px rgba(149, 76, 233, 0.5));
+  transition: all 0.3s ease;
+}
+
+.tech-icon-container:hover .tech-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px rgba(149, 76, 233, 0.8));
+}
+
+/* Технические секции */
+.tech-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20% 30%, rgba(149, 76, 233, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(98, 58, 162, 0.05) 0%, transparent 50%);
+  z-index: -1;
+}
+
+/* Технические табы */
+.tech-tabs {
+  display: flex;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.25rem;
+  background: rgba(149, 76, 233, 0.1);
+  border-radius: 0.75rem;
+}
+
+.tech-tab {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-tab.active {
+  color: white;
+}
+
+.tech-tab.active::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary) / 0.8));
+  z-index: -1;
+}
+
+.tech-tab:not(.active) {
+  color: hsl(var(--foreground) / 0.7);
+}
+
+.tech-tab:not(.active):hover {
+  color: hsl(var(--foreground));
+  background: rgba(149, 76, 233, 0.1);
+}
+
+/* Технический счетчик */
+.tech-counter {
+  font-family: "Courier New", monospace;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgba(149, 76, 233, 0.1), rgba(149, 76, 233, 0.2));
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border-left: 3px solid hsl(var(--primary));
+}
+
+.tech-counter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+  animation: scanline 2s linear infinite;
+}
+
+/* Технический процесс */
+.tech-process {
+  position: relative;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tech-process::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, hsl(var(--primary)), transparent);
+}
+
+.tech-process-step {
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+.tech-process-step::before {
+  content: "";
+  position: absolute;
+  left: -2rem;
+  top: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 10px hsl(var(--primary));
+}
+
+.tech-process-step::after {
+  content: "";
+  position: absolute;
+  left: -1.5rem;
+  top: 1rem;
+  width: 1.5rem;
+  height: 1px;
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Технический аккордеон */
+.tech-accordion {
+  border: 1px solid rgba(149, 76, 233, 0.2);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+}
+
+.dark .tech-accordion {
+  background: rgba(30, 30, 35, 0.1);
+}
+
+.tech-accordion-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.tech-accordion-header:hover {
+  background: rgba(149, 76, 233, 0.05);
+}
+
+.tech-accordion-header.active {
+  border-bottom-color: rgba(149, 76, 233, 0.2);
+}
+
+.tech-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding: 0 1rem;
+}
+
+.tech-accordion-content.active {
+  max-height: 500px;
+  padding: 1rem;
+}
+
+/* Технические карточки с эффектом терминала */
+.terminal-card {
+  background: rgba(20, 20, 25, 0.95);
+  border: 1px solid rgba(149, 76, 233, 0.3);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-family: "Courier New", monospace;
+  color: #a0e0a0;
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5rem;
+  background: rgba(149, 76, 233, 0.2);
+  border-bottom: 1px solid rgba(149, 76, 233, 0.3);
+}
+
+.terminal-card::after {
+  content: "● ● ●";
+  position: absolute;
+  top: 0.25rem;
+  left: 0.5rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.terminal-content {
+  margin-top: 1.5rem;
+}
+
+.terminal-line {
+  display: block;
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.terminal-line::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: hsl(var(--primary));
+}
+
+.terminal-line.output {
+  color: #e0e0a0;
+  padding-left: 1.5rem;
+}
+
+.terminal-line.output::before {
+  content: "";
+}
+
+.terminal-cursor {
+  display: inline-block;
+  width: 0.5rem;
+  height: 1rem;
+  background: hsl(var(--primary));
+  animation: blink 1s step-end infinite;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Технические бейджи */
+.tech-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: linear-gradient(90deg, rgba(149, 76, 233, 0.1), rgba(149, 76, 233, 0.2));
+  border: 1px solid rgba(149, 76, 233, 0.2);
+  color: hsl(var(--foreground));
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tech-badge-icon {
+  margin-right: 0.25rem;
+  color: hsl(var(--primary));
+}
+
+/* Технические диаграммы */
+.tech-diagram {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  margin: 2rem 0;
+}
+
+.tech-diagram-bar {
+  position: absolute;
+  bottom: 0;
+  width: 10%;
+  background: linear-gradient(to top, hsl(var(--primary)), hsl(var(--primary) / 0.5));
+  border-radius: 0.25rem 0.25rem 0 0;
+  transition: height 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tech-diagram-label {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: hsl(var(--foreground) / 0.7);
+  white-space: nowrap;
+}
+
+.tech-diagram-value {
+  position: absolute;
+  top: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: hsl(var(--primary));
+  font-weight: bold;
+}
+
+/* Технические кнопки с эффектом глитча */
+.glitch-button {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: 1px solid hsl(var(--primary));
+  color: hsl(var(--primary));
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+.glitch-button::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsl(var(--primary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.glitch-button:hover::before {
+  transform: translateX(0);
+}
+
+.glitch-button:hover {
+  color: white;
+  box-shadow: 0 0 15px hsl(var(--primary) / 0.5);
+}
+
+.glitch-button::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+}
+
+.glitch-button:hover::after {
+  animation: glitch-scan 1s linear;
+}
+
+@keyframes glitch-scan {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Технические карточки с 3D эффектом */
+.tech-card-3d {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.tech-card-3d:hover {
+  transform: rotateY(10deg) rotateX(5deg);
+}
+
+.tech-card-3d::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.2), transparent);
+  transform: translateZ(-1px);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.tech-card-3d:hover::before {
+  opacity: 1;
+}
+
+/* Технические анимированные иконки */
+.tech-animated-icon {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tech-animated-icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px dashed hsl(var(--primary) / 0.5);
+  animation: spin 10s linear infinite;
+}
+
+.tech-animated-icon::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  border-radius: 50%;
+  border: 1px dashed hsl(var(--primary) / 0.3);
+  animation: spin 15s linear infinite reverse;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Технический прогресс-бар */
+.tech-progress {
+  width: 100%;
+  height: 0.5rem;
+  background: rgba(149, 76, 233, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.tech-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, hsl(var(--primary) / 0.7), hsl(var(--primary)));
+  border-radius: 1rem;
+  transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tech-progress-bar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: progress-shine 2s infinite;
+}
+
+@keyframes progress-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Технические метрики */
+.tech-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.tech-metric {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(149, 76, 233, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .tech-metric {
+  background: rgba(30, 30, 35, 0.1);
+}
+
+.tech-metric::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+}
+
+.tech-metric-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: hsl(var(--primary));
+  margin-bottom: 0.5rem;
+  font-family: "Courier New", monospace;
+}
+
+.tech-metric-label {
+  font-size: 0.875rem;
+  color: hsl(var(--foreground) / 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Технические вкладки */
+.tech-tabs-container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.tech-tabs-list {
+  display: flex;
+  gap: 0.25rem;
+  border-bottom: 1px solid rgba(149, 76, 233, 0.2);
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.tech-tab-item {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  position: relative;
+  color: hsl(var(--foreground) / 0.7);
+  transition: all 0.3s ease;
+}
+
+.tech-tab-item.active {
+  color: hsl(var(--primary));
+}
+
+.tech-tab-item::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: hsl(var(--primary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.tech-tab-item.active::after {
+  transform: scaleX(1);
+}
+
+.tech-tab-content {
+  display: none;
+  padding: 1rem 0;
+}
+
+.tech-tab-content.active {
+  display: block;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.shadow-glow {
+  box-shadow: 0 0 15px 2px rgba(var(--primary) / 0.3);
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s infinite ease-in-out;
+}
+
+@keyframes pulse-slow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--primary) / 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(var(--primary) / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--primary) / 0);
+  }
+}
+
