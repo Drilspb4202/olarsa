@@ -54,7 +54,7 @@ export default function TechSkills() {
         <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
           <div className="w-16 h-1 bg-primary rounded-full mb-4"></div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl tech-heading">
-            Технические <span className="text-gradient">Навыки</span>
+            Технические <span className="text-gradient">компетенции</span>
           </h2>
           <p className="max-w-[700px] text-foreground/80 md:text-xl">
             Профессиональные компетенции для решения ваших технических задач

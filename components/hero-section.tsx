@@ -59,9 +59,9 @@ export default function HeroSection() {
               </div>
             </div>
             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl animate-in tech-heading">
-              Технические решения от{" "}
-              <span className="relative">
-                Ольги
+              <span className="text-gradient bg-gradient-to-r from-purple-400 to-violet-600">Технические решения</span> от{" "}
+              <span className="relative inline-block">
+                <span className="relative z-10 text-gradient bg-gradient-to-r from-violet-500 to-purple-300 font-extrabold">Ольги</span>
                 <svg
                   className="absolute -bottom-2 left-0 w-full h-2 text-primary/30"
                   viewBox="0 0 100 10"
@@ -69,6 +69,7 @@ export default function HeroSection() {
                 >
                   <path d="M0,0 C25,5 75,5 100,0 L100,10 L0,10 Z" fill="currentColor" />
                 </svg>
+                <div className="absolute -inset-2 bg-primary/5 blur-lg rounded-lg z-0"></div>
               </span>
             </h1>
             <p className="mx-auto max-w-[700px] text-foreground/80 md:text-xl animate-in stagger-1">
