@@ -1,15 +1,19 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Code, Database, Server, Globe, MessageSquare, BarChart3, Layout } from "lucide-react"
 
 export default function TechSkills() {
   const skillsRef = useRef<HTMLDivElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    // Устанавливаем флаг, что компонент смонтирован на клиенте
+    setIsMounted(true)
+    
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && isMounted) {
           const bars = document.querySelectorAll(".tech-diagram-bar")
           bars.forEach((bar) => {
             const height = bar.getAttribute("data-height")
@@ -22,16 +26,16 @@ export default function TechSkills() {
       { threshold: 0.1 },
     )
 
-    if (skillsRef.current) {
+    if (skillsRef.current && isMounted) {
       observer.observe(skillsRef.current)
     }
 
     return () => {
-      if (skillsRef.current) {
+      if (skillsRef.current && isMounted) {
         observer.unobserve(skillsRef.current)
       }
     }
-  }, [])
+  }, [isMounted])
 
   const skills = [
     { name: "Telegram Боты", level: 95, icon: <MessageSquare className="h-6 w-6" /> },

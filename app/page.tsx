@@ -18,6 +18,9 @@ export default function Home() {
     // Устанавливаем флаг монтирования для предотвращения проблем с гидратацией
     setIsMounted(true)
     
+    // Все DOM-манипуляции только если компонент смонтирован
+    if (!isMounted) return;
+    
     // Функция для анимации элементов при прокрутке
     const animateOnScroll = () => {
       const elements = document.querySelectorAll(".reveal")
@@ -90,7 +93,7 @@ export default function Home() {
     setTimeout(animateCounters, 1000)
 
     return () => window.removeEventListener("scroll", animateOnScroll)
-  }, [])
+  }, [isMounted])
 
   return (
     <main className="min-h-screen relative overflow-hidden tech-section">

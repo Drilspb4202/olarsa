@@ -1,13 +1,17 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronRight, Code, Database, Server, ArrowDown } from "lucide-react"
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
+    // Устанавливаем флаг, что компонент смонтирован на клиенте
+    setIsMounted(true)
+    
     const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return
 
@@ -28,12 +32,17 @@ export default function HeroSection() {
       })
     }
 
-    document.addEventListener("mousemove", handleMouseMove)
+    // Добавляем обработчик событий только на клиенте
+    if (isMounted) {
+      document.addEventListener("mousemove", handleMouseMove)
+    }
 
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
+      if (isMounted) {
+        document.removeEventListener("mousemove", handleMouseMove)
+      }
     }
-  }, [])
+  }, [isMounted])
 
   return (
     <section ref={sectionRef} className="py-24 md:py-32 hero-gradient relative overflow-hidden tech-section">
